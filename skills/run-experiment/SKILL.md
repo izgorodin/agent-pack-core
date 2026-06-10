@@ -40,7 +40,7 @@ The concrete values — replicates, integrity checklist, registry location, the 
 - [ ] All expected metrics present; no NaN/Inf.
 - [ ] Integrity invariants held in the *output* too (per the profile's anti-leak invariants — e.g. the profile's "Source of truth & integrity" section).
 - [ ] **Re-run-once rule** (applies when the profile has a stated variance band — e.g. a ±1–2 pp band from an LLM-judge): a borderline hard-fail within the variance band is likely noise — re-run once before calling it a regression.
-- [ ] Compare against the baseline from the run-spec (hand off to `analyze` for the full verdict).
+- [ ] Compare against the baseline from the run-spec, and compute the verdict per the profile's thresholds + `experiment-paradigm-discipline` (PASS / REGRESSION / IMPROVEMENT / INCONCLUSIVE, apples-to-apples, within the profile's variance band).
 
 ## Phase 4 — Report (mandatory)
 
@@ -58,4 +58,3 @@ Stage results + report + registry update. Commit on a feature branch (standing r
 
 - One benchmark at a time when runs share a backing store (a shared database, a shared index, etc.) — parallel runs pollute each other's state.
 - For a multi-run sequence, let `experiment-campaign` drive the loop; this skill is the single-run unit it calls.
-</content>

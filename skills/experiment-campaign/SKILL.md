@@ -1,7 +1,7 @@
 ---
 name: experiment-campaign
 model: opus
-description: Run a planned sequence of experiments hands-off — chain experiment-design → run-experiment → analyze → register for each run in a campaign, pacing long background jobs with /loop dynamic mode and stopping on regression or budget breach. Use this when you have a list of runs to execute unattended (a full benchmark sweep, a knob-decomposition campaign, a multi-benchmark regression pass), when the user says "run the whole benchmark campaign", "kick off all the benches and report back", "do the sweep overnight", or hands you a multi-run plan. For a single run, use run-experiment directly — this skill is the loop around it.
+description: Run a planned sequence of experiments hands-off — chain experiment-design → run-experiment → verdict → register for each run in a campaign, pacing long background jobs with /loop dynamic mode and stopping on regression or budget breach. Use this when you have a list of runs to execute unattended (a full benchmark sweep, a knob-decomposition campaign, a multi-benchmark regression pass), when the user says "run the whole benchmark campaign", "kick off all the benches and report back", "do the sweep overnight", or hands you a multi-run plan. For a single run, use run-experiment directly — this skill is the loop around it.
 ---
 
 # Run an experiment campaign
@@ -31,7 +31,7 @@ For each run-spec in the list:
 3. **Pace with `/loop` dynamic mode.** Use `ScheduleWakeup` to sleep while the run proceeds. Pick the delay by what you're waiting on, not round numbers:
    - The harness re-invokes you when a tracked background job finishes — so the wake-up is a **fallback**, not the primary signal. Set it long (1200 s+) so you're not burning the prompt cache polling a multi-hour job.
    - If you're watching external state the harness can't notify you about (a remote queue), poll under the 5-min cache window (≤ 270 s).
-4. **On completion**, validate (`run-experiment` Phase 3) and **analyze** → verdict.
+4. **On completion**, validate (`run-experiment` Phase 3) and compute the **verdict** per the profile's thresholds + `experiment-paradigm-discipline` (the verdict + variance-band logic lives there).
 5. **Register** the row, **append to the campaign report**, and check the gates (budget, stop-on-regression).
 6. **Next run**, or stop if a gate fired or the list is empty.
 
@@ -44,4 +44,3 @@ Maintain a running campaign report: one section per run (paradigm, config, resul
 - A run that **crashes** (traceback / OOM / dies) is not a verdict — surface it, don't mark it PASS or skip silently. Decide with the user whether to retry, fix, or abort the campaign.
 - A **borderline hard-fail** gets the re-run-once variance check before it counts as REGRESSION (per profile).
 - If the campaign is halted by a gate, leave the run list and cumulative state in the report so it can be resumed.
-</content>

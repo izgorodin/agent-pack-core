@@ -57,4 +57,3 @@ Decide what the run is *for*. The profile enumerates the paradigms (for example:
 - [ ] Metrics listed, apples-to-apples metric identified, thresholds + variance band set
 - [ ] Dataset present; cost/time estimated
 - [ ] Run-spec written + registry row appended
-</content>

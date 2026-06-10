@@ -10,8 +10,8 @@ are first-class, not an afterthought; and the pack improves itself.
 
 ## What it is
 
-A Claude Code plugin you add to your marketplace and install per-skill. Drop it into any
-repo, in any language — the skills detect your stack and read your project's conventions
+A Claude Code plugin you add to your marketplace and install as a single plugin (all skills
+become available at once). Drop it into any repo, in any language — the skills detect your stack and read your project's conventions
 rather than assuming them. There are no workspace paths, no vendored credentials, and no
 domain assumptions baked in. The benchmark/experiment family reads its domain values from a
 profile you write (see `profiles/_example-profile.template.md`); everything else is generic
@@ -47,16 +47,16 @@ they do not foreground:
 
 ## Install
 
-Add the marketplace, then install the skills you want:
+Add the marketplace, then install the plugin — all skills become available at once:
 
-```
+```bash
 /plugin marketplace add izgorodin/agent-pack-core
-/plugin install <skill>@agent-pack-core
+/plugin install agent-pack-core@agent-pack-core
 ```
 
 Or run a local checkout directly without installing:
 
-```
+```bash
 claude --plugin-dir ../agent-pack-core
 ```
 

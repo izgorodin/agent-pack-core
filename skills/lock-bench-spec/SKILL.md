@@ -7,7 +7,7 @@ description: Mechanically lock a draft bench-spec — validate frontmatter compl
 
 # /lock-bench-spec — mechanical lock + git tag + push
 
-You are the **lock mechanic** for bench-specs. Your job is single-purpose: take a filled draft bench-spec and execute the lock transition with zero ambiguity. You do **not** judge content quality (that's `/review-methodology` pre-lock); you do **not** generate spec content (that's `/bench-spec-author`); you only **freeze what's been written and create the anchor**.
+You are the **lock mechanic** for bench-specs. Your job is single-purpose: take a filled draft bench-spec and execute the lock transition with zero ambiguity. You do **not** judge content quality (that's a pre-lock content review, if your workspace ships one); you do **not** generate spec content (that's `/bench-spec-author`); you only **freeze what's been written and create the anchor**.
 
 The lock transition is mechanical because it must be reproducible and audit-able. Future readers must be able to verify that the spec at the lock-tag commit matches what the project claims to have pre-registered.
 
@@ -17,7 +17,7 @@ The user or another skill hands you a bench-spec path. They expect one of three 
 
 1. **Lock succeeded** — file modified with lock fields, commit made, tag created and pushed. Report tag URL.
 2. **Lock blocked by missing prerequisite** — surface the exact unmet requirement, do nothing else.
-3. **Lock blocked by quality issue** — only if the spec is malformed (not the same as "content is bad"); refuse and refer to `/review-methodology`.
+3. **Lock blocked by quality issue** — only if the spec is malformed (not the same as "content is bad"); refuse and refer to a pre-lock content review (if your workspace ships one).
 
 ## The lock checklist — strict order
 
@@ -174,17 +174,17 @@ Report in this exact structure:
 
 ## Next steps
 
-- Autonomous loop can now start: `/loop /research-iteration` against `<path>`
-- Or manual single run: `/research-iteration --spec <path>`
+- Autonomous loop can now start against `<path>` (your workspace's research-iteration loop body, if it ships one)
+- Or a manual single run against `<path>`
 
 The spec is now **immutable**. Any change must be in a new spec with `supersedes: bench-NNNN`.
 ```
 
 ## What you do NOT do
 
-- Edit spec body (§1–§9 content). If content is wrong, halt and refer to `/review-methodology` or `/bench-spec-author`.
+- Edit spec body (§1–§9 content). If content is wrong, halt and refer to `/bench-spec-author` (or a pre-lock content review, if your workspace ships one).
 - Decide whether spec is methodologically sound. That's pre-lock review.
-- Run experiments. That's `/research-iteration`.
+- Run experiments. That's the research-iteration loop body your workspace ships (not this skill).
 - Override frontmatter completeness check. Missing fields = no lock.
 - Force-push tags. Locked tags never overwrite an existing lock.
 
@@ -215,8 +215,8 @@ If you find yourself reasoning about content quality — stop. You're outside bo
 ## Related skills
 
 - `/agent-pack-core:bench-spec-author` — produces the filled draft you read.
-- `/agent-pack-core:review-methodology` — pre-lock content review.
-- `/agent-pack-core:research-iteration` — what runs against your locked output.
+- a pre-lock content review (if your workspace ships one) — runs before this lock.
+- a research-iteration loop body (if your workspace ships one) — what runs against your locked output.
 - `/agent-pack-core:check-stop` — reads the locked spec you produced.
 
 ## References

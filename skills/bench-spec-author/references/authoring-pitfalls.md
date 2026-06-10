@@ -162,4 +162,3 @@ For ρ=0.4, α=0.05 two-tailed, power 0.8:
 ---
 
 If the user makes any of these mistakes during the interview, name the pitfall explicitly and reference the methodology section that addresses it. The goal isn't to gate-keep; it's to make the design rigorous before lock. Each pitfall caught now saves a superseder later.
-</content>

@@ -292,4 +292,3 @@ The spec is currently editable. Once locked, it becomes immutable; corrections r
 - `references/bench-methodology.md` — full methodology document (v0.8). Read this before any interview.
 - `references/bench-spec.template.md` — fillable template. Your output structure follows this exactly.
 - `references/authoring-pitfalls.md` — common mistakes in spec authoring (proxy misclassification, weak δ rationale, missing guardrails, etc.). Includes the §7.3 power-claim fix (≥47 scale points, not ≥8) — required reading for proxy-class authors.
-</content>

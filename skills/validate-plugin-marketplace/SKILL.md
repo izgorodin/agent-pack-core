@@ -37,9 +37,9 @@ A marketplace manifest looks like:
 
 For each entry, check:
 
-### A. `source` must be an object, not a string
+### A. `source` must be an object, OR the local `"./"` string
 
-The most common gotcha. A bare string `"source": "."` (or any string) is rejected at install time with:
+The most common gotcha. A bare string `"source": "."` (or any non-local string) is rejected at install time with:
 
 > This plugin uses a source type your Claude Code version does not support.
 
@@ -52,7 +52,7 @@ The error blames the version; the real cause is the manifest.
 | `{"source": "url", "url": "..."}` | Plugin lives at the top of a public/private repo | `{"source": "url", "url": "https://github.com/org/repo"}` |
 | `{"source": "git-subdir", "url": "...", "path": "..."}` | Plugin lives in a subdirectory of the marketplace repo | `{"source": "git-subdir", "url": "https://github.com/org/repo", "path": "plugins/my-plugin"}` |
 
-**Flag** any plugin whose `source` is a string. Suggest the matching object form.
+**The local form** `"source": "./"` (a string, paired with `"strict": false`) is also valid — and is the right choice when the plugin lives in the marketplace repo itself (a single-repo marketplace, where one repo IS both the marketplace and the plugin). **Flag** any *other* bare-string source (e.g. `"."`, or a path without the companion `"strict": false`) and suggest the matching object form.
 
 ### B. Required fields per plugin entry
 
@@ -64,7 +64,7 @@ The top level needs `name` and `plugins`. `version` is optional but recommended 
 
 ### D. File location
 
-`marketplace.json` must be at the **root** of the marketplace repo, not in a subdirectory. If you find one in `.claude-plugin/marketplace.json` or `meta/marketplace.json`, that's a structural mistake — flag it. (Note: the *plugin* manifest goes in `<plugin-root>/.claude-plugin/plugin.json` — that's a different file with a different role.)
+`marketplace.json` lives at `.claude-plugin/marketplace.json` at the marketplace repo root — the `.claude-plugin/` directory is its home (the same place the plugin manifest `plugin.json` lives, in a single-repo marketplace). Flag it only if it's loose at the bare repo root, or buried in an unrelated subdirectory like `meta/marketplace.json`. (The *plugin* manifest `plugin.json` sits alongside it at `<plugin-root>/.claude-plugin/plugin.json` — a different file with a different role.)
 
 ## Step 3 — Lint `plugin.json` (the plugin-level manifest)
 

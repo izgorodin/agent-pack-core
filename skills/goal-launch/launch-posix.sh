@@ -134,8 +134,8 @@ if [[ "$SKIP_BRANCH_PROTECTION" -ne 1 ]]; then
     if [[ -z "$REMOTE" ]]; then
         fail "G1: cannot resolve remote (gh not authed? not a GitHub repo?). Use --skip-branch-protection for a personal repo."
     fi
-    PROT_RAW="$(gh api "repos/$REMOTE/branches/main/protection" 2>&1)"
-    if [[ $? -ne 0 ]]; then
+    set +e; PROT_RAW="$(gh api "repos/$REMOTE/branches/main/protection" 2>&1)"; GH_RC=$?; set -e
+    if [[ $GH_RC -ne 0 ]]; then
         if echo "$PROT_RAW" | grep -Eq 'Upgrade to GitHub Pro|HTTP 403|403 Forbidden'; then
             warn "G1 SKIPPED — branch protection API returned 403 (private free-plan limit on $REMOTE)."
             warn "    Defense falls back to L11 pre-push hook + condition negative-assertions."

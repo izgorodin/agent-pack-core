@@ -50,6 +50,33 @@ jobs:
           fi
           echo "Coupling-marker gate passed: no markers found."
 
+      # Fail on leaked build-wrapper tags (e.g. </content>, </invoke>) — these are
+      # distillation/transform artifacts that must never ship in skill markdown.
+      # Same self-exclusion of .github/workflows as the coupling gate above.
+      - name: Scan for leaked build-wrapper tags
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Scanning for orphan build-wrapper tags..."
+          mapfile -t FILES < <(
+            find . \
+              -type d \( -path './.git' -o -path './.github/workflows' \) -prune -o \
+              -type f \( -name '*.md' -o -name '*.ps1' -o -name '*.sh' -o -name '*.json' -o -name '*.txt' \) -print
+          )
+          HITS=0
+          for f in "${FILES[@]}"; do
+            if grep -nE '^[[:space:]]*</(content|invoke|document|file_content|parameter)>[[:space:]]*$' "$f" | grep -q .; then
+              echo "::error file=$f::leaked build-wrapper tag"
+              grep -nE '^[[:space:]]*</(content|invoke|document|file_content|parameter)>[[:space:]]*$' "$f" || true
+              HITS=1
+            fi
+          done
+          if [ "$HITS" -ne 0 ]; then
+            echo "Build-wrapper-tag gate FAILED. Strip the tags above before merge."
+            exit 1
+          fi
+          echo "Build-wrapper-tag gate passed: no orphan tags found."
+
   markdownlint:
     name: markdownlint
     runs-on: ubuntu-latest

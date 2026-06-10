@@ -547,5 +547,3 @@ If the author overrides a default — note it in the relevant section of the spe
 
 - [Papers with Code sunset announcement and analysis (CodeSOTA)](https://www.codesota.com/papers-with-code).
 - [paperswithcode-data archive (GitHub)](https://github.com/paperswithcode).
-</content>
-</invoke>
