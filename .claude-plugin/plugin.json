@@ -1,0 +1,12 @@
+{
+  "name": "agent-pack-core",
+  "description": "Evidence-first BDD + research-discipline skills, agents, and protocols for Claude Code. Portable and workspace-agnostic: every skill cites file:line / command output as proof, audit subagents ship first-class, and benchmark/experiment rigor is distilled into reusable methodology.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Eduard Izgorodin",
+    "email": "helloworld@uinside.org"
+  },
+  "homepage": "https://github.com/izgorodin/agent-pack-core",
+  "license": "Apache-2.0",
+  "keywords": ["claude-code", "agent", "skills", "bdd", "evidence-first", "research"]
+}

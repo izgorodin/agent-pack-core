@@ -1,0 +1,15 @@
+{
+  "name": "agent-pack-core",
+  "owner": {
+    "name": "Eduard Izgorodin",
+    "email": "helloworld@uinside.org"
+  },
+  "plugins": [
+    {
+      "name": "agent-pack-core",
+      "source": "./",
+      "strict": false,
+      "description": "Evidence-first BDD + research-discipline skills, audit agents, protocols, and rules for Claude Code. Portable and workspace-agnostic."
+    }
+  ]
+}
