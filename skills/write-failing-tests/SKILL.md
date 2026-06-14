@@ -52,6 +52,15 @@ def test_revoked_token_returns_401(client, revoked_token):
 
 The reason these tests fail meaningfully is that they hit a real route, exercise a real cookie/header, and check a real status. They don't pass by being wired to nothing — they pass only when behavior actually works.
 
+## Common mistakes — fixtures and mocks that can't fail
+
+A red test only proves what its environment can express. Two measured failure modes from real sessions, both of which shipped a broken fix under green red→green tests:
+
+- **Fixtures in the wrong shape.** A fixture hand-written with API field names (`checkIn`) while production mints the object with renderer field names (`checkInDate`) made a data-loss bug invisible: the code under test wholesale-replaced the nested object, and the test stayed green because the fixture never carried the fields that got lost. Copy fixture shapes from the real producing code (the mint site, a recorded API response) — don't write them from memory.
+- **Mocks without the real physics.** A mocked `scrollTo` that accepts any offset proved only "we called scroll with the right number" — the real ScrollView clamps to the mounted content height, and the fix landed hundreds of points short on both platforms. If the failure mode lives in platform behavior (clamping, truncation, rounding, event ordering), either assert the precondition that makes the call valid (target ≤ scrollable range at call time) or build the limit into the mock.
+
+The test must be able to fail **for the reason the bug exists** — otherwise red→green is theater.
+
 ## Step 4 — Run the tests, confirm they fail correctly
 
 ```bash
