@@ -169,6 +169,10 @@ EOF
 
 If the user doesn't want the PR opened automatically (some repos prefer the GitHub web UI for the final push of "Open"), stop after the push and tell them the URL where they can open it.
 
+## Step 9 — Capture the learning (if you maintain a skill-pack)
+
+If shipping this PR surfaced something reusable about your own skills or process — a gap in a skill, a recurring pattern with no skill, a rule that should exist — capture it now, while it's fresh. One line into your improvement backlog (the `self-improve` skill routes pack-level findings to `evolution/backlog.md`); the deliberate generate-and-gate happens later, batched. Cheap, < 1 min. Skip if there's nothing pack-worthy — never invent a finding.
+
 ## Output
 
 ```
@@ -178,6 +182,7 @@ If the user doesn't want the PR opened automatically (some repos prefer the GitH
 ✓ Commit: <hash> on branch <branch>
 ✓ Pushed to origin
 ✓ PR opened: <URL>
+✓ Captured: 1 learning → improvement backlog        ← omit line if nothing pack-worthy
 ```
 
 Or, if interrupted:
