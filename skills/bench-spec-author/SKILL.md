@@ -9,7 +9,7 @@ model: opus
 **This is the entry point of the loop-pipeline chain.** If you're on a fresh project with no `specs/bench-*-*.md` yet, this is where you start. The chain is:
 
 ```text
-/bench-spec-author → draft → methodology review → revisions → /lock-bench-spec → /loop research-iteration ← → /check-stop
+/bench-spec-author → draft → methodology review → revisions → /lock-bench-spec → /loop <workspace-loop-body> ← → /check-stop
 ```
 
 Subsequent skills assume a spec exists; this one creates it.

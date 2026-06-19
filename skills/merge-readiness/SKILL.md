@@ -1,6 +1,6 @@
 ---
 name: merge-readiness
-description: The final merge gate. Run the full acceptance-criteria checklist BEFORE proposing any merge to a human (or before self-merging, once delegated). Produces a per-criterion PASS/FAIL audit + a mechanical GO/NO-GO verdict. Use every time you are about to say "this is ready to merge" / "ready for merge" / "good to merge?" / before `gh pr merge`. Operationalizes the review-and-merge protocol (complete-vs-correct, L1/L3). Refuses GO if any CRITICAL fails — that is the point. Composes /review-methodology (or a Workflow adversarial wave) for the independent-correctness tier.
+description: The final merge gate. Run the full acceptance-criteria checklist BEFORE proposing any merge to a human (or before self-merging, once delegated). Produces a per-criterion PASS/FAIL audit + a mechanical GO/NO-GO verdict. Use every time you are about to say "this is ready to merge" / "ready for merge" / "good to merge?" / before `gh pr merge`. Operationalizes the review-and-merge protocol (complete-vs-correct, L1/L3). Refuses GO if any CRITICAL fails — that is the point. Composes an independent depth-review wave (e.g. /review-methodology if your workspace ships one, or a Workflow adversarial wave) for the independent-correctness tier.
 allowed-tools: Bash(git*), Bash(gh*), Bash(pnpm*), Bash(uv run*), Bash(npm*), Bash(just*), Grep, Read, Glob, Agent
 model: opus
 ---
@@ -66,7 +66,7 @@ Run top to bottom. For each: do the CHECK, record PASS/FAIL/N-A + evidence. **CR
 
 ### F — Independent correctness *(the load-bearing tier — required for load-bearing changes)*
 
-- **F1 [CRITICAL for load-bearing] An independent adversarial wave ran AND its must-fix findings are fixed (not merely acknowledged).** Use `/review-methodology` for research/methodology, or a Workflow panel of N reviewers (distinct lenses: correctness / tests / completeness / contract-fidelity / honesty) for code. Each reviewer blind to the producer's reasoning. Re-verify each fix. List the findings + how each was resolved. *Guards: green-but-wrong; self-review never catches errors of intent.*
+- **F1 [CRITICAL for load-bearing] An independent adversarial wave ran AND its must-fix findings are fixed (not merely acknowledged).** Use an independent depth-review wave appropriate to the artifact type: `/review-methodology` for research/methodology (if your workspace ships that skill), or a Workflow panel of N reviewers (distinct lenses: correctness / tests / completeness / contract-fidelity / honesty) for code. Each reviewer blind to the producer's reasoning. Re-verify each fix. List the findings + how each was resolved. *Guards: green-but-wrong; self-review never catches errors of intent.*
 - **F2 Execution re-verify by you, not the producer's word.** Re-run the real tests/build/migration on the real target yourself; confirm the producer's claimed numbers. Trust-but-verify — this also catches *your own* setup errors (wrong branch, wrong DSN, prod-vs-test target).
 - **F3 needs-human-decision escalated, not self-resolved.** Any committed-decision amendment, default-flip, bench verdict driving a decision, or destructive/cross-repo action goes to the human approver with the facts — never resolved by docstring rationalization.
 
@@ -111,6 +111,6 @@ The human approver's stated path: when these audits come out consistently clean 
 
 ## References
 
-- `protocols/review-and-merge.md` — the policy this operationalizes (complete-vs-correct, L1/L2/L3, the load-bearing boundary, live evidence). *(Companion draft; pending the maintainer's review.)*
+- `protocols/review-and-merge.md` — the policy this operationalizes (complete-vs-correct, L1/L2/L3, the load-bearing boundary, live evidence). *(Companion protocol: review-and-merge — ratified.)*
 - `protocols/anti-hallucination.md` — adjacent integrity discipline.
-- skills: `review-methodology` (the F1 wave for research), `address-review` (process findings), `pr-preparation` / `commit-and-pr` (the pre-review packaging this gate sits after).
+- skills: `review-methodology` (an example F1 depth-review wave for research, if your workspace ships it), `address-review` (process findings), `pr-preparation` / `commit-and-pr` (the pre-review packaging this gate sits after).

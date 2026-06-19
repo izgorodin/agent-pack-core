@@ -1,6 +1,6 @@
 # Review-and-merge protocol
 
-**Status:** DRAFT (2026-05-29) — load-bearing process rule; pending the maintainer's external review before it binds the factory.
+**Status:** Active (v1) — ratified 2026-06-19 after independent review.
 
 How work produced by goal-agents / subagents gets from "done" to "merged" without the lead (or the human owner) drowning in manual QA, and without producer-rationalized errors slipping into `main`.
 

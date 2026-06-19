@@ -6,7 +6,7 @@ Companion to `SKILL.md`. Defines edge cases and the formal schema for halt-condi
 
 The system uses **two related but distinct verdict vocabularies**. Confusing them is a known foot-gun.
 
-### Per-iteration `verdict` (bare tokens, written by `/research-iteration`)
+### Per-iteration `verdict` (bare tokens, written by the workspace loop body)
 
 Lives in `iter-N/results.md` frontmatter `verdict:` field. Describes **what this single iteration produced**:
 
@@ -139,10 +139,10 @@ If the spec declares **fixed-reference scalar baseline** (published number, no p
 
 This skill does **not**:
 
-- Decide whether the spec itself is well-designed. That's `/review-methodology`'s job, pre-lock.
+- Decide whether the spec itself is well-designed. That's a depth-review skill's job pre-lock (a `/review-methodology` skill, if your workspace ships one).
 - Suggest a new spec when proxy is falsified. That's `bench-spec-author`'s job.
-- Run the next experiment. That's `research-iteration`'s job.
-- Approve / reject iteration artifacts. That's audit subagents (`contradiction-hunter`, `clarity-validator`) called inside `research-iteration`.
+- Run the next experiment. That's a research-iteration loop body's job (if your workspace ships one).
+- Approve / reject iteration artifacts. That's audit subagents (`contradiction-hunter`, `clarity-validator`) called inside the loop body.
 
 Your boundary: read state, apply rules, emit verdict. Pure evaluation, no action.
 
