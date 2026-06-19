@@ -80,6 +80,7 @@ claude --plugin-dir ../agent-pack-core
 - `goal-launch` — launch a goal-directed run (ships `launch-windows.ps1` + `launch-posix.sh`).
 - `validate-plugin-marketplace` — lint a marketplace + plugin manifest pair.
 - `skill-creator` — create, improve, and eval skills (vendored from Anthropic, Apache-2.0).
+- `onboarding` — first-run orientation: what the pack is, the skills, `goal-launch` safety, and the conventions.
 
 ### Skills — bench / experiment methodology
 
