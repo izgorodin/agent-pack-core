@@ -1,0 +1,13 @@
+agent-pack-core
+Copyright 2026 Eduard Izgorodin
+Apache License 2.0 — see LICENSE
+
+---
+
+Third-party vendored content:
+
+skills/skill-creator/
+  Source:    https://github.com/anthropics/skills (anthropics/skills)
+  Copyright: Anthropic
+  License:   Apache License 2.0 (see skills/skill-creator/LICENSE.txt)
+  Vendored verbatim; no modifications.

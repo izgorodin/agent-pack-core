@@ -79,6 +79,7 @@ claude --plugin-dir ../agent-pack-core
 - `spawn-worker-subagent` — fan out work to a worktree-isolated worker subagent.
 - `goal-launch` — launch a goal-directed run (ships `launch-windows.ps1` + `launch-posix.sh`).
 - `validate-plugin-marketplace` — lint a marketplace + plugin manifest pair.
+- `skill-creator` — create, improve, and eval skills (vendored from Anthropic, Apache-2.0).
 
 ### Skills — bench / experiment methodology
 
@@ -120,11 +121,14 @@ claude --plugin-dir ../agent-pack-core
 
 ## Companion: Anthropic's reference skills
 
-This pack deliberately does **not** vendor Anthropic's reference skills. If you want
-`claude-api`, `mcp-builder`, `skill-creator`, or `pdf`, pull them from
+This pack does not vendor most of Anthropic's reference skills. If you want `claude-api`,
+`mcp-builder`, or `pdf`, pull them from
 [anthropics/skills](https://github.com/anthropics/skills) and run them alongside this pack —
-composition, not vendoring. Keeping them upstream means they never rot against their source,
-and this core stays entirely original and Apache-2.0 clean.
+composition, not vendoring. Keeping them upstream means they never rot against their source.
+
+`skill-creator` is an exception: it is **included and vendored** in this pack under
+`skills/skill-creator/`, attributed to Anthropic (Apache-2.0 — see `skills/skill-creator/LICENSE.txt`
+and the `NOTICE` file at the pack root). The vendored copy is unmodified.
 
 ## Pinning for consumers
 

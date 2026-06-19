@@ -72,7 +72,7 @@ Apply these? (y / edit / drop specific items / abort)
 
 Walk through each approved item and apply it. For skill / rule / hook edits, run the repo's gate command after, to verify nothing regressed at the meta level.
 
-For new skills or rules: ideally invoke `/skill-creator` to draft the new artifact properly. (If the user is in a hurry, write a draft and flag it for proper iteration in a future session.) `/skill-creator` is not part of this core pack — it's an optional companion skill from `anthropics/skills`; the README explains how to add it alongside this pack.
+For new skills or rules: ideally invoke `/agent-pack-core:skill-creator` to draft the new artifact properly. (If the user is in a hurry, write a draft and flag it for proper iteration in a future session.)
 
 For DECISIONS.md updates: invoke `/add-adr` with the decision title.
 
