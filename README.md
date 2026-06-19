@@ -81,6 +81,7 @@ claude --plugin-dir ../agent-pack-core
 - `validate-plugin-marketplace` — lint a marketplace + plugin manifest pair.
 - `skill-creator` — create, improve, and eval skills (vendored from Anthropic, Apache-2.0).
 - `onboarding` — first-run orientation: what the pack is, the skills, `goal-launch` safety, and the conventions.
+- `self-improve` — drive the pack's own improvement loop: capture learnings to a backlog, then batch-generate via `skill-creator` and gate via `merge-readiness` (never self-merges).
 
 ### Skills — bench / experiment methodology
 
