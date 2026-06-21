@@ -4,7 +4,7 @@ When implementing a published algorithm — from a paper, a textbook, an existin
 
 ## The rule
 
-If the user (or an ADR, or a code comment) says "implement Leiden community detection", "use NPMI for co-occurrence weights", "follow Graphiti's bi-temporal model", or anything similar — the implementation must be the published algorithm verbatim. Nothing more, nothing less.
+If the user (or an ADR, or a code comment) says "implement Levenshtein distance", "use BM25 for document ranking", "follow RFC-7519 JWT claim validation", or anything similar — the implementation must be the published algorithm verbatim. Nothing more, nothing less.
 
 When you finish, the implementation must satisfy:
 
@@ -14,7 +14,7 @@ When you finish, the implementation must satisfy:
 
 ## Why this matters
 
-Numerical and research code relies on specific algorithmic guarantees. Leiden gives you a particular kind of community partition; an "improved" variant doesn't, and the downstream proofs break. NPMI normalizes co-occurrence in a particular way; a custom variant gives different rankings. Bi-temporal model with 4 timestamps is a contract; collapsing to 2 makes contradictions un-detectable.
+Numerical and research code relies on specific algorithmic guarantees. Levenshtein distance has a particular edit-cost model; a custom variant produces different rankings and breaks downstream comparisons. BM25 normalises term frequency in a particular way; a hand-rolled variant gives different scores. The RFC-7519 JWT claim set is a contract; dropping required fields makes tokens unverifiable by conforming libraries.
 
 Subtle deviations are subtle to discover. A paper-faithful implementation is verifiable; a "lightly improved" one is not.
 
@@ -41,10 +41,10 @@ If during implementation you notice that the published algorithm seems to have a
 
 ## What to do when integrating with an existing implementation
 
-If a library implements the algorithm (`leidenalg`, `igraph`, `networkx`, etc.):
+If a library implements the algorithm (`scipy`, `sklearn`, `requests`, `httpx`, etc.):
 
 1. Use the library. Don't reimplement.
-2. Verify the library's algorithm matches the one you were asked to implement (sometimes "Louvain" and "Leiden" get conflated in API names).
+2. Verify the library's algorithm matches the one you were asked to implement (sometimes similar-sounding algorithms get conflated in API names — e.g. cosine similarity vs dot-product similarity).
 3. Stay within the library's guarantees — don't pre-process the input in a way that violates the algorithm's preconditions.
 
 ## Verification scripts as ground truth

@@ -91,10 +91,10 @@ Candidates:
 Merge-readiness audits: evolution/candidates/YYYY-MM-DD-*/audit.md
 Eval benchmarks: evolution/candidates/YYYY-MM-DD-*/benchmark.json
 
-Ready to install: items 1, 2 above. Awaiting your approval + Atlas ratification before any file moves into the pack.
+Ready to install: items 1, 2 above. Awaiting approval from the designated approver(s) before any file moves into the pack.
 ```
 
-**No self-install.** Nothing moves from `evolution/candidates/` into the pack until Atlas + Edward explicitly approve. Once approved, each accepted candidate is copied into the pack, the backlog entry updated to `status: shipped`, and a PR opened via `/commit-and-pr`.
+**No self-install.** Nothing moves from `evolution/candidates/` into the pack until the human approver(s) explicitly approve. Once approved, each accepted candidate is copied into the pack, the backlog entry updated to `status: shipped`, and a PR opened via `/commit-and-pr`.
 
 ---
 

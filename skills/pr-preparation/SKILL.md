@@ -64,7 +64,7 @@ If scrubbing, prefer `git rebase -i` interactively (NOT in a Claude session — 
 ## Step 5 — Generate PR title and body
 
 Title: under 70 chars. Imperative mood. No trailing period. Example:
-- ✅ "Add bi-temporal edge timestamps to claim layer"
+- ✅ "Add idempotency key to the order-creation endpoint"
 - ❌ "Adding some changes for the claims module."
 
 Body template:

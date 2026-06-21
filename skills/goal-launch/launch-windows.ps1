@@ -35,7 +35,7 @@
   evaluator 200k context limit per #61759).
 
 .PARAMETER Slug
-  Short identifier for the worktree + branch name. e.g. "epic-964-runbook".
+  Short identifier for the worktree + branch name. e.g. "my-feature-runbook".
   Branch will be `goal/<slug>`; worktree at `C:\tmp\worktrees\goal-<slug>`.
 
 .PARAMETER RubricPath
@@ -47,10 +47,10 @@
 
 .EXAMPLE
   .\launch-windows.ps1 `
-    -Slug "epic-964-runbook" `
+    -Slug "<your-run-slug>" `
     -MaxTurns 50 `
     -WallClockMinutes 60 `
-    -Condition '/goal Initialize .loop-state.json (OVERWRITE) with poolFile=docs/specs/epic-964-triage-pool.md, status=uninitialized. Then run /loop-task-runner repeatedly until completion. Completion in this turn: (a) cat .loop-state.json shows status review-pending or done; (b) gh pr list --head chore/epic-964/issue-961-stage5-docs-runbook --json state shows OPEN; (c) grep -E "^## (Rollout|Rollback)" docs/epics/library-content/LIB-001-STAGE-5-RUNBOOK.md returns matches. NEGATIVE: NEVER gh pr merge. Final post-mortem: cat .loop-state.json. Stop after 50 turns.'
+    -Condition '/goal Initialize .loop-state.json (OVERWRITE) with poolFile=<pool-file-path>, status=uninitialized. Then run /<your-pool-worker-skill> repeatedly until completion. Completion in this turn: (a) cat .loop-state.json shows status review-pending or done; (b) gh pr list --head <branch-prefix> --json state shows OPEN; (c) <artifact-verification-command>. NEGATIVE: NEVER gh pr merge. Final post-mortem: cat .loop-state.json. Stop after 50 turns.'
 #>
 
 [CmdletBinding()]

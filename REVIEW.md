@@ -10,12 +10,15 @@ For every pull request to this repo, before merge:
 
 1. **`/code-review`** — review the diff for correctness bugs and for reuse / simplification
    / efficiency cleanups. Findings are addressed or explicitly waived with a reason in the
-   PR thread.
+   PR thread. *(This skill comes from Claude Code built-ins or a companion pack — it is not
+   included in agent-pack-core itself.)*
 2. **`/security-review`** — review the diff for security issues. Because this pack carries a
    `secrets-hygiene` rule and a `docs-guard` coupling gate, a security finding on a secrets
-   or coupling-marker regression is treated as blocking, not advisory.
+   or coupling-marker regression is treated as blocking, not advisory. *(Same as above —
+   Claude Code built-in or companion pack, not part of agent-pack-core.)*
 3. **`/merge-readiness`** — the GO / NO-GO gate. It produces a trust ledger over the
    evidence: gate status, review outcomes, and any open findings. The verdict is binary.
+   *(This skill IS included in agent-pack-core.)*
 
 A PR merges only on a **GO**. A **NO-GO** lists exactly what is missing; the author closes
 those items and re-runs the gate. No silent merges, no "I'll fix it after."

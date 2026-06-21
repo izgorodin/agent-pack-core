@@ -5,7 +5,7 @@
 How work produced by goal-agents / subagents gets from "done" to "merged" without the lead (or the human owner) drowning in manual QA, and without producer-rationalized errors slipping into `main`.
 
 This protocol is the connective tissue between existing pack pieces:
-`goal-launch` (start a run) → `check-stop` (in-loop halt for research loops) → **this protocol** (review-gate + merge decision) → `review-methodology` (external research depth review) / `address-review` (PR-comment processing).
+`goal-launch` (start a run) → `check-stop` (in-loop halt for research loops) → **this protocol** (review-gate + merge decision) → `review-methodology` (external research depth review, if your workspace ships one) / `address-review` (PR-comment processing).
 
 ---
 
@@ -30,7 +30,7 @@ Two different things get proven by two different mechanisms. Conflating them is 
 
 **L3 in practice** = a Workflow adversarial wave (N independent verifiers, each a distinct lens, each blind to the producer's reasoning) **plus** an execution re-verify the lead runs themselves (trust-but-verify), **plus** a human ratify on the genuinely irreversible/contested calls.
 
-For research artifacts the L3 wave is `review-methodology` (contradiction-hunter + clarity-validator + ai-research-scientist). For code it's a per-dimension Workflow (domain-invariant / migration round-trip / contract-fidelity / regression-scope / domain-specific).
+For research artifacts the L3 wave is `review-methodology` (contradiction-hunter + clarity-validator + ai-research-scientist), if your workspace ships one. For code it's a per-dimension Workflow (domain-invariant / migration round-trip / contract-fidelity / regression-scope / domain-specific).
 
 ---
 
@@ -82,4 +82,4 @@ The lesson the factory runs on: **green CI + producer "done" is L1, not L3.** Fo
 
 - your repo's critical-action / verify-before-claiming rule, if present — the human-double-check list this protocol defers to, and the "name a coordinate before claiming a win" discipline; the execution re-verify is that coordinate.
 - `protocols/anti-hallucination.md` (this pack) — adjacent integrity discipline.
-- skills: `goal-launch`, `check-stop`, `review-methodology`, `address-review` — the pieces this protocol connects.
+- skills: `goal-launch`, `check-stop`, `review-methodology` (if your workspace ships one), `address-review` — the pieces this protocol connects.

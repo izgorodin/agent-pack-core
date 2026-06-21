@@ -27,7 +27,7 @@ Be specific. "Things were slow" is not a finding. "The lint skill misclassified 
 | Type of finding | Artifact | How to update |
 |---|---|---|
 | Tied to a specific PR (context for reviewer, follow-up note) | Comment in that PR | `gh pr comment <N> --body "..."` |
-| Architectural decision, supersedes or refines an existing one | `DECISIONS.md` | invoke `/add-adr` |
+| Architectural decision, supersedes or refines an existing one | `DECISIONS.md` | invoke `/add-adr` (if your workspace provides an ADR skill), or append to `DECISIONS.md` directly |
 | Personal preference / shortcut / habit, useful in future sessions | Auto-memory | save to `~/.claude/projects/<project>/memory/<topic>.md` (and update `MEMORY.md` index) |
 | Project-wide rule that should always hold | `CLAUDE.md` or `.claude/rules/<topic>.md` | edit; use `paths:` frontmatter if scoped to a subtree |
 | **Existing skill misfired or had a gap** | `<...>/skills/<name>/SKILL.md` | edit description / body; add a "common mistakes" section if you saw one |
@@ -74,7 +74,7 @@ Walk through each approved item and apply it. For skill / rule / hook edits, run
 
 For new skills or rules: ideally invoke `/agent-pack-core:skill-creator` to draft the new artifact properly. (If the user is in a hurry, write a draft and flag it for proper iteration in a future session.)
 
-For DECISIONS.md updates: invoke `/add-adr` with the decision title.
+For DECISIONS.md updates: invoke `/add-adr` with the decision title (if your workspace provides an ADR skill), or append to `DECISIONS.md` directly.
 
 For auto-memory: append a topic file in `~/.claude/projects/<project>/memory/`, update `MEMORY.md` index entry. Both per Claude Code memory spec.
 

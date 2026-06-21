@@ -29,7 +29,7 @@
 #
 # Usage:
 #   ./launch-posix.sh \
-#     --slug epic-964-runbook \
+#     --slug my-feature-runbook \
 #     --max-turns 50 \
 #     --wallclock-minutes 60 \
 #     --condition '/goal Initialize .loop-state.json (OVERWRITE) with poolFile=... NEGATIVE: NEVER gh pr merge. Stop after 50 turns.'

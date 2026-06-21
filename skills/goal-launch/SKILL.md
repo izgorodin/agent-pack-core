@@ -32,7 +32,7 @@ on a developer machine — not in the plugin cache.)
 
 ## When to use
 
-- You want to run a skill (e.g. `loop-task-runner`, `epic-triage`) unattended
+- You want to run a skill (e.g. `experiment-campaign`, `spawn-worker-subagent`) unattended
   with a measurable end-state.
 - The end-state can be PROVEN from the transcript via a tool call in the final
   turn (exit code, grep result, file existence, gh state).
@@ -172,18 +172,19 @@ NEGATIVE: transcript does NOT contain `gh issue close`, `gh issue comment`,
 `gh pr merge`, or `git push origin main`. Stop after 20 turns.
 ```
 
-**Canonical example (epic-triage):**
+**Illustrative example (substitute your own triage skill + paths):**
 
 ```
-/goal Run /epic-triage 964. Verify in the current turn: `ls docs/specs/epic-964-triage-digest.md docs/specs/epic-964-triage-pool.md` exits 0 AND the stdout summary table shows bucket counts. NEGATIVE: transcript does NOT contain `gh issue close`, `gh issue comment`, `gh issue edit`, `gh pr merge`, or `git push origin main`. Stop after 20 turns.
+/goal Run /<your-triage-skill> <args>. Verify in the current turn: `ls docs/specs/<your-epic>-triage-digest.md docs/specs/<your-epic>-triage-pool.md` exits 0 AND the stdout summary table shows bucket counts. NEGATIVE: transcript does NOT contain `gh issue close`, `gh issue comment`, `gh issue edit`, `gh pr merge`, or `git push origin main`. Stop after 20 turns.
 ```
 
 ### Pattern B — Looping worker (chained task chain)
 
-`loop-task-runner` against a pool. Worker opens PR; NEVER merges.
+`<your-pool-worker-skill>` against a pool. Worker opens PR; NEVER merges.
+`<your-pool-worker-skill>` is your workspace's pool-worker skill — substitute its real name.
 
 ```
-/goal Initialize .loop-state.json (OVERWRITE — switching pools) with poolFile=<path>, status=uninitialized. Then run /loop-task-runner repeatedly until completion. Verification in the current turn requires ALL three: (a) `cat .loop-state.json` shows status "review-pending" or "done" AND poolFile is <path>; (b) `gh pr list --head <branch-prefix> --json state` shows OPEN; (c) <artifact verification command>. NEGATIVE: NEVER call `gh pr merge` (transcript must not contain it). Final post-mortem: re-run `cat .loop-state.json` so final state remains in the transcript. Stop after 50 turns.
+/goal Initialize .loop-state.json (OVERWRITE — switching pools) with poolFile=<path>, status=uninitialized. Then run /<your-pool-worker-skill> repeatedly until completion. Verification in the current turn requires ALL three: (a) `cat .loop-state.json` shows status "review-pending" or "done" AND poolFile is <path>; (b) `gh pr list --head <branch-prefix> --json state` shows OPEN; (c) <artifact verification command>. NEGATIVE: NEVER call `gh pr merge` (transcript must not contain it). Final post-mortem: re-run `cat .loop-state.json` so final state remains in the transcript. Stop after 50 turns.
 ```
 
 ### Pattern C — Wave-disciplined (Anthropic-Outcomes shape)
@@ -210,8 +211,9 @@ Per-task contract instead of "drift==0 at any cost" — prevents blind annotatio
 that masks real bugs.
 
 ```
-/goal Run /loop-task-runner. Per-task contract: (resolved + deferred-with-reason) / original_count >= 0.80; deferred entries logged to <REPORT.md> with concrete reasons. Verification in the current turn: ALL pool tasks reach status "review-pending" with their contract met (verify via `cat .loop-state.json` AND `grep "^##" <REPORT.md>` showing the expected deferred-sections). NEGATIVE: no blanket `@intentional-*` annotation without a colon-separated rationale (verified by `grep -rhE "@intentional-[a-z]+( |$)" src/ services/ packages/ | wc -l` returning 0 — lines where the annotation is followed by space-or-EOL instead of `: <reason>`). NEVER call gh pr merge. Stop after 60 turns.
+/goal Run /<your-pool-worker-skill>. Per-task contract: (resolved + deferred-with-reason) / original_count >= 0.80; deferred entries logged to <REPORT.md> with concrete reasons. Verification in the current turn: ALL pool tasks reach status "review-pending" with their contract met (verify via `cat .loop-state.json` AND `grep "^##" <REPORT.md>` showing the expected deferred-sections). NEGATIVE: no blanket `@intentional-*` annotation without a colon-separated rationale (verified by `grep -rhE "@intentional-[a-z]+( |$)" src/ services/ packages/ | wc -l` returning 0 — lines where the annotation is followed by space-or-EOL instead of `: <reason>`). NEVER call gh pr merge. Stop after 60 turns.
 ```
+`<your-pool-worker-skill>` is your workspace's pool-worker skill — substitute its real name.
 
 ---
 
@@ -359,7 +361,7 @@ runner and tracker.
 - **`cat .loop-state.json` tail trick:** end every condition with a clause
   ensuring final state is in transcript regardless of which check triggered
   `yes`. Invaluable for post-mortem.
-- **Branch naming `<class>/<scope>/<slug>`:** e.g. `chore/epic-964/issue-961-stage5-docs-runbook`,
+- **Branch naming `<class>/<scope>/<slug>`:** e.g. `chore/<your-scope>/<your-task-slug>`,
   `goal/cleanup-week`. A consistent prefix lets L6 match by prefix.
 - **PR template references source pool:** have every agent-opened PR's body link
   the spec/pool file it worked from so the reviewer sees the source.

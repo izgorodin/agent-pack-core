@@ -76,6 +76,7 @@ experiment-design → run-experiment   (or experiment-campaign for a sweep)
 |---|---|
 | `validate-plugin-marketplace` | Lint a `marketplace.json` or `plugin.json` for the gotchas that produce confusing install-time errors. Read-only; never modifies the manifest. |
 | `skill-creator` | Create, iterate, and eval new skills. Vendored from Anthropic (Apache-2.0, unmodified). |
+| `self-improve` | Drive the pack's own improvement loop — capture session learnings into an evolution backlog (Phase 1), then batch-generate and gate proposed skill/rule changes via skill-creator + merge-readiness (Phase 2). Never self-installs. |
 
 ---
 
