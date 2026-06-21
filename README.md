@@ -82,6 +82,7 @@ claude --plugin-dir ../agent-pack-core
 - `skill-creator` — create, improve, and eval skills (vendored from Anthropic, Apache-2.0).
 - `onboarding` — first-run orientation: what the pack is, the skills, `goal-launch` safety, and the conventions.
 - `self-improve` — drive the pack's own improvement loop: capture learnings to a backlog, then batch-generate via `skill-creator` and gate via `merge-readiness` (never self-merges).
+- `backport-review` — compare a downstream clone against this base and surface universal improvements to port back; run before tagging a clone release. Read-only.
 
 ### Skills — bench / experiment methodology
 

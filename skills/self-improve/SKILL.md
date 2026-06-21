@@ -98,6 +98,17 @@ Ready to install: items 1, 2 above. Awaiting approval from the designated approv
 
 ---
 
+## Clone divergence — keep the base in sync
+
+If this pack has downstream clones (or if you are working inside a clone), run
+`/backport-review` periodically and **always before tagging a clone release**. Universal
+improvements — generic fixes, clearer wording, new domain-agnostic skills — tend to
+accumulate in clones and never find their way back to the base, causing silent divergence
+that compounds with every release. `backport-review` makes that debt visible and
+actionable before it becomes painful.
+
+---
+
 ## What this skill does NOT do
 
 - Does not auto-generate improvements on a schedule or silently on every PR.
