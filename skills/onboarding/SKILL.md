@@ -126,6 +126,8 @@ They do **not** ship: the OS sandbox (operator setup), worktree creation (the sc
 
 **Green gate ≠ correctness.** A passing gate proves consistency with its own tests — not truth. The pack distinguishes: *ran-and-saw* vs *looks-consistent* vs *judgment*.
 
+**No silent magic numbers.** A count, total, or version that should track reality is *derived* from the source, or — when it can't be (e.g. a static badge on a private repo shields.io can't read) — *gated* by a CI check that goes red when it drifts. Never a bare hardcoded literal that silently rots. See `rules/no-magic-numbers.md`.
+
 **User approves before infrastructure changes.** `session-reflect` always shows a proposed batch and waits for approval before applying any skill, rule, hook, or CI update. Self-modification requires explicit confirmation.
 
 **No auto-merge.** `merge-readiness` produces a recommendation, not a merge action. The human approver holds that decision.
