@@ -77,6 +77,42 @@ jobs:
           fi
           echo "Build-wrapper-tag gate passed: no orphan tags found."
 
+      # Fail if any skill-count number in README has drifted out of sync with the
+      # skills actually on disk. A static "skills-N" shields badge can't auto-count
+      # on a private repo (shields.io can't read it) — so instead of a magic number
+      # that silently lies, this gate makes lying impossible: every count claim in
+      # README must match `ls skills/*/SKILL.md`, and grouped sub-counts must sum to
+      # the total. Add a skill, forget to bump the number -> CI goes red.
+      - name: Scan for stale skill counts
+        shell: bash
+        run: |
+          set -uo pipefail
+          actual=$(ls skills/*/SKILL.md 2>/dev/null | wc -l | tr -d ' ')
+          echo "Actual skill count (skills/*/SKILL.md): $actual"
+          fail=0
+          # Total claims: the shields "skills-N" badge and any "N invokable skills" line.
+          totals="$(grep -oE 'skills-[0-9]+' README.md | grep -oE '[0-9]+'; grep -oE '[0-9]+ invokable skills' README.md | grep -oE '^[0-9]+')"
+          for n in $totals; do
+            if [ "$n" != "$actual" ]; then
+              echo "::error file=README.md::skill-count claim '$n' does not match actual ($actual)"
+              fail=1
+            fi
+          done
+          # Grouped breakdown like "(15 skills)" must sum to the actual total.
+          groups="$(grep -oE '\([0-9]+ skills?\)' README.md | grep -oE '[0-9]+')"
+          if [ -n "$groups" ]; then
+            sum=0; for g in $groups; do sum=$((sum + g)); done
+            if [ "$sum" != "$actual" ]; then
+              echo "::error file=README.md::grouped skill counts sum to $sum but actual is $actual"
+              fail=1
+            fi
+          fi
+          if [ "$fail" -ne 0 ]; then
+            echo "Skill-count gate FAILED. Update the README counts (or the skills) so they match."
+            exit 1
+          fi
+          echo "Skill-count gate passed: README counts consistent with $actual skills."
+
   markdownlint:
     name: markdownlint
     runs-on: ubuntu-latest
