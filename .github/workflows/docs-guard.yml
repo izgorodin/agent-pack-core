@@ -86,7 +86,7 @@ jobs:
       - name: Scan for stale skill counts
         shell: bash
         run: |
-          set -uo pipefail
+          set +e  # GitHub Actions injects -e; a grep with no match is expected here, so we handle counts manually
           actual=$(ls skills/*/SKILL.md 2>/dev/null | wc -l | tr -d ' ')
           echo "Actual skill count (skills/*/SKILL.md): $actual"
           fail=0
