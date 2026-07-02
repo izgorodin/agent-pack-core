@@ -78,6 +78,9 @@ claude --plugin-dir ../agent-pack-core
 - `merge-readiness` — GO / NO-GO gate with a trust ledger over the evidence.
 - `spawn-worker-subagent` — fan out work to a worktree-isolated worker subagent.
 - `goal-launch` — launch a goal-directed run (ships `launch-windows.ps1` + `launch-posix.sh`).
+- `night-shift` — a supervised autonomous shift while the user is away: self-pacing wake
+  timer, answer-your-own-questions protocol (risk + pros/cons), verifiable checkpoints, a
+  morning report. Live-session counterpart to `goal-launch`.
 - `validate-plugin-marketplace` — lint a marketplace + plugin manifest pair.
 - `skill-creator` — create, improve, and eval skills (vendored from Anthropic, Apache-2.0).
 - `onboarding` — first-run orientation: what the pack is, the skills, `goal-launch` safety, and the conventions.
@@ -101,6 +104,10 @@ claude --plugin-dir ../agent-pack-core
 - `ai-research-scientist` — research-grade reviewer subagent.
 - `clarity-validator` — flags ambiguity and underspecification.
 - `contradiction-hunter` — hunts cross-document contradictions.
+- `worker` — Sonnet-pinned execution worker: mechanical, well-scoped tasks the
+  orchestrator has already decided on.
+- `scout` — Sonnet-pinned read-only reconnaissance: find, inventory, map, verify claims —
+  with `path:line` evidence.
 
 ### Protocols
 
@@ -112,6 +119,8 @@ claude --plugin-dir ../agent-pack-core
 
 ### Rules
 
+- `model-delegation` — the expensive model orchestrates, model-pinned cheap agents
+  execute; pin models in agent definitions, never rely on inherit.
 - `python-base` — baseline Python conventions.
 - `typescript-base` — baseline TypeScript conventions.
 - `secrets-hygiene` — provider-neutral never-commit / never-log / never-paste + leak

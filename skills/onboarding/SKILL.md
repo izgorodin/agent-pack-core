@@ -69,6 +69,7 @@ experiment-design → run-experiment   (or experiment-campaign for a sweep)
 |---|---|
 | `goal-launch` | Compose and launch an unattended `/goal` run with a 6-element transcript-provable stop condition, sandboxed worktree, and a layered safety stack. Refuses to launch if any of 8 preconditions fail (see safety section below). |
 | `spawn-worker-subagent` | Fan out 2–4 independent tasks to parallel worktree-isolated worker sub-agents, then aggregate PRs and DX findings. Trigger when you have 2–4 independent issues to close in parallel. |
+| `night-shift` | Run a supervised autonomous shift while the user is away: self-pacing wake timer, answer-your-own-questions protocol (risk + pros/cons), verifiable checkpoints, three stop conditions, and a morning report. Live-session counterpart to `goal-launch` — permission system stays on. |
 
 ### 4. Pack tooling
 
@@ -126,6 +127,8 @@ They do **not** ship: the OS sandbox (operator setup), worktree creation (the sc
 
 **Green gate ≠ correctness.** A passing gate proves consistency with its own tests — not truth. The pack distinguishes: *ran-and-saw* vs *looks-consistent* vs *judgment*.
 
+**The expensive model orchestrates; pinned cheap agents execute.** Mechanical, well-scoped work goes to the pack's `worker` / `scout` agents (Sonnet-pinned in their frontmatter) — never inline in a top-tier session and never to an unpinned agent, which silently inherits the session's model. See `rules/model-delegation.md`.
+
 **No silent magic numbers.** A count, total, or version that should track reality is *derived* from the source, or — when it can't be (e.g. a static badge on a private repo shields.io can't read) — *gated* by a CI check that goes red when it drifts. Never a bare hardcoded literal that silently rots. See `rules/no-magic-numbers.md`.
 
 **User approves before infrastructure changes.** `session-reflect` always shows a proposed batch and waits for approval before applying any skill, rule, hook, or CI update. Self-modification requires explicit confirmation.
@@ -156,6 +159,7 @@ They do **not** ship: the OS sandbox (operator setup), worktree creation (the sc
 | Turn session learnings into system improvements | `session-reflect` |
 | Fan out 2–4 tasks in parallel | `spawn-worker-subagent` |
 | Launch an unattended `/goal` run | `goal-launch` |
+| Work autonomously while the user is away | `night-shift` |
 | Design and run a benchmark | `experiment-design` + `run-experiment` |
 | Run a full benchmark sweep unattended | `experiment-campaign` |
 | Start a pre-registered research project | `bench-spec-author` → `lock-bench-spec` |

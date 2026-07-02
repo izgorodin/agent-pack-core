@@ -60,7 +60,10 @@ for review agents. Sequential loses wall-clock AND triangulation.
 ```
 Agent({
   description: "Worker A — issue #N1",
-  subagent_type: "general-purpose",
+  subagent_type: "worker",  // the pack's Sonnet-pinned worker ("<pack>:worker" when
+                            // installed as a plugin) — never an unpinned general-purpose,
+                            // which silently inherits the expensive session model;
+                            // see rules/model-delegation.md
   isolation: "worktree",    // workers get worktree
   run_in_background: true,
   prompt: <WORKER_BRIEF>,
@@ -88,7 +91,14 @@ instead.
 ```
 Agent({
   description: "Review A — PR #M1",
-  subagent_type: "general-purpose",
+  subagent_type: "contradiction-hunter",  // a pack reviewer, Sonnet-pinned in its
+                                          // frontmatter ("<pack>:contradiction-hunter"
+                                          // when installed as a plugin); pick the
+                                          // reviewer that fits the brief
+                                          // (clarity-validator, ai-research-scientist).
+                                          // Only fall back to general-purpose WITH an
+                                          // explicit model — never inherit the
+                                          // session's. See rules/model-delegation.md
   // NO isolation — review is read-only
   run_in_background: true,
   prompt: <REVIEW_BRIEF>,
